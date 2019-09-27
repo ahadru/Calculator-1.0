@@ -31,10 +31,11 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/buttonExtra"
+            android:id="@+id/buttonSqrt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wait"/>
+            android:text="sqrt"
+            android:textAllCaps="false"/>
         <Button
             android:id="@+id/buttonMod"
             android:layout_width="wrap_content"
