@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button but1,but2,but3,but4,but5,but6,but7,but8,but9,but0,butAdd,butDiv,butSub,butMul,butMod,butDot,butEqual,butX,butC;
+    private Button but1,but2,but3,but4,but5,but6,but7,but8,but9,but0,
+            butAdd,butDiv,butSub,butMul,butMod,butDot,butEqual,butX,butC,butSqrt;
     private TextView content,contentRes;
     private String opStatus = "NOT";
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         butMul = findViewById(R.id.buttonMul);
         butMod = findViewById(R.id.buttonMod);
         butDot = findViewById(R.id.buttonDot);
+        butSqrt = findViewById(R.id.buttonSqrt);
         butC = findViewById(R.id.buttonC);
         butEqual = findViewById(R.id.buttonEqual);
         content = findViewById(R.id.content);
@@ -180,6 +182,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        butSqrt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!content.getText().toString().matches("")){
+                    value = Math.sqrt(Double.parseDouble(content.getText().toString()));
+                    contentRes.setText(String.valueOf(value));
+                    content.setText("");
+                }
+            }
+        });
         butEqual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -229,7 +241,14 @@ public class MainActivity extends AppCompatActivity {
         butDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(content.getText().toString().matches("")){
+                    content.setText("0.");
+                }
+                else{
+                    if(!content.getText().toString().contains(".")){
+                        content.setText(content.getText().toString()+".");
+                    }
+                }
             }
         });
         butX.setOnClickListener(new View.OnClickListener() {
@@ -244,7 +263,10 @@ public class MainActivity extends AppCompatActivity {
         butC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                contentRes.setText("0");
+                content.setText("");
+                value = 0;
+                opStatus = "NOT";
             }
         });
     }
