@@ -3,11 +3,16 @@ package com.ahad.calculatorlabfinal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+
 import android.os.Bundle;
 import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -115,42 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("tag",Double.toString(value));
                 Log.d("tag",opStatus);
                 if(!content.getText().toString().matches("") && value != 0){
-                    switch (opStatus){
-                        case "ADD":
-                            value += Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "ADD";
-                            statusB.setText("+");
-                            break;
-                        case "SUB":
-                            value -= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "ADD";
-                            statusB.setText("+");
-                            break;
-                        case "MUL":
-                            value *= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "ADD";
-                            statusB.setText("+");
-                            break;
-                        case "DIV":
-                            double tmp = Double.parseDouble(content.getText().toString());
-                            if(tmp != 0){
-                                value /= Double.parseDouble(content.getText().toString());
-                                contentRes.setText(Double.toString(value));
-                                opStatus = "ADD";
-                                statusB.setText("+");
-                            }
-                            else{
-                                contentRes.setText("Invalid");
-                                opStatus = "NOT";
-                                statusB.setText("=");
-                            }
-                            break;
-                            default:
-                    }
-                    content.setText("");
+                    dualCondition("ADD");
                 }
                 else if(content.getText().toString().matches("") && value != 0){
                     opStatus = "ADD";
@@ -159,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     if(!content.getText().toString().matches("")){
                         contentRes.setText(content.getText().toString());
-                        value = Double.parseDouble(content.getText().toString());
+                        value = FourDecimalPrecision(Double.parseDouble(content.getText().toString()));
                         opStatus = "ADD";
                         statusB.setText("+");
                         content.setText("");
@@ -173,42 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("tag",Double.toString(value));
                 Log.d("tag",opStatus);
                 if(!content.getText().toString().matches("") && value != 0){
-                    switch (opStatus){
-                        case "ADD":
-                            value += Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "SUB";
-                            statusB.setText("-");
-                            break;
-                        case "SUB":
-                            value -= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "SUB";
-                            statusB.setText("-");
-                            break;
-                        case "MUL":
-                            value *= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "SUB";
-                            statusB.setText("-");
-                            break;
-                        case "DIV":
-                            double tmp = Double.parseDouble(content.getText().toString());
-                            if(tmp != 0){
-                                value /= Double.parseDouble(content.getText().toString());
-                                contentRes.setText(Double.toString(value));
-                                opStatus = "SUB";
-                                statusB.setText("-");
-                            }
-                            else{
-                                contentRes.setText("Invalid");
-                                opStatus = "NOT";
-                                statusB.setText("=");
-                            }
-                            break;
-                        default:
-                    }
-                    content.setText("");
+                    dualCondition("SUB");
                 }
                 else if(content.getText().toString().matches("") && value != 0){
                     opStatus = "SUB";
@@ -217,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     if(!content.getText().toString().matches("")){
                         contentRes.setText(content.getText().toString());
-                        value = Double.parseDouble(content.getText().toString());
+                        value = FourDecimalPrecision(Double.parseDouble(content.getText().toString()));
                         opStatus = "SUB";
                         statusB.setText("-");
                         content.setText("");
@@ -231,42 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("tag",Double.toString(value));
                 Log.d("tag",opStatus);
                 if(!content.getText().toString().matches("") && value != 0){
-                    switch (opStatus){
-                        case "ADD":
-                            value += Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "DIB";
-                            statusB.setText("/");
-                            break;
-                        case "SUB":
-                            value -= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "DIV";
-                            statusB.setText("/");
-                            break;
-                        case "MUL":
-                            value *= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "DIV";
-                            statusB.setText("/");
-                            break;
-                        case "DIV":
-                            double tmp = Double.parseDouble(content.getText().toString());
-                            if(tmp != 0){
-                                value /= Double.parseDouble(content.getText().toString());
-                                contentRes.setText(Double.toString(value));
-                                opStatus = "DIV";
-                                statusB.setText("/");
-                            }
-                            else{
-                                contentRes.setText("Invalid");
-                                opStatus = "NOT";
-                                statusB.setText("=");
-                            }
-                            break;
-                        default:
-                    }
-                    content.setText("");
+                    dualCondition("DIV");
                 }
                 else if(content.getText().toString().matches("") && value != 0){
                     opStatus = "DIV";
@@ -275,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     if(!content.getText().toString().matches("")){
                         contentRes.setText(content.getText().toString());
-                        value = Double.parseDouble(content.getText().toString());
+                        value = FourDecimalPrecision(Double.parseDouble(content.getText().toString()));
                         opStatus = "DIV";
                         statusB.setText("/");
                         content.setText("");
@@ -287,42 +187,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!content.getText().toString().matches("") && value != 0){
-                    switch (opStatus){
-                        case "ADD":
-                            value += Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "MUL";
-                            statusB.setText("*");
-                            break;
-                        case "SUB":
-                            value -= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "MUL";
-                            statusB.setText("*");
-                            break;
-                        case "MUL":
-                            value *= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "MUL";
-                            statusB.setText("*");
-                            break;
-                        case "DIV":
-                            double tmp = Double.parseDouble(content.getText().toString());
-                            if(tmp != 0){
-                                value /= Double.parseDouble(content.getText().toString());
-                                contentRes.setText(Double.toString(value));
-                                opStatus = "MUL";
-                                statusB.setText("*");
-                            }
-                            else{
-                                contentRes.setText("Invalid");
-                                opStatus = "NOT";
-                                statusB.setText("=");
-                            }
-                            break;
-                        default:
-                    }
-                    content.setText("");
+                    dualCondition("MUL");
                 }
                 else if(content.getText().toString().matches("") && value != 0){
                     opStatus = "MUL";
@@ -331,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     if(!content.getText().toString().matches("")){
                         contentRes.setText(content.getText().toString());
-                        value = Double.parseDouble(content.getText().toString());
+                        value = FourDecimalPrecision(Double.parseDouble(content.getText().toString()));
                         opStatus = "MUL";
                         statusB.setText("*");
                         content.setText("");
@@ -345,41 +210,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("tag",Double.toString(value));
                 if(!content.getText().toString().matches("") && value != 0){
-                    switch (opStatus){
-                        case "ADD":
-                            value += Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "MOD";
-                            statusB.setText("%");
-                            break;
-                        case "SUB":
-                            value -= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "MOD";
-                            statusB.setText("%");
-                            break;
-                        case "MUL":
-                            value *= Double.parseDouble(content.getText().toString());
-                            contentRes.setText(Double.toString(value));
-                            opStatus = "MOD";
-                            statusB.setText("%");
-                            break;
-                        case "DIV":
-                            double tmp = Double.parseDouble(content.getText().toString());
-                            if(tmp != 0){
-                                value /= Double.parseDouble(content.getText().toString());
-                                contentRes.setText(Double.toString(value));
-                                opStatus = "MOD";
-                                statusB.setText("%");
-                            }
-                            else{
-                                contentRes.setText("Invalid");
-                                opStatus = "NOT";
-                                statusB.setText("=");
-                            }
-                        default:
-                    }
-                    content.setText("");
+                    dualCondition("MOD");
                 }
                 else if(content.getText().toString().matches("") && value != 0){
                     opStatus = "MOD";
@@ -388,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     if(!content.getText().toString().matches("")){
                         contentRes.setText(content.getText().toString());
-                        value = Double.parseDouble(content.getText().toString());
+                        value = FourDecimalPrecision(Double.parseDouble(content.getText().toString()));
                         opStatus = "MOD";
                         statusB.setText("%");
                         content.setText("");
@@ -417,20 +248,20 @@ public class MainActivity extends AppCompatActivity {
                     statusB.setText("=");
                     if(opStatus.equals("ADD")){
                         if(!content.getText().toString().matches("")){
-                            value += Double.parseDouble(content.getText().toString());
+                            value = FourDecimalPrecision(value+Double.parseDouble(content.getText().toString()));
                             contentRes.setText(Double.toString(value));
                             opStatus = "NOT";
                             content.setText("");
                         }
                     }
                     else if(opStatus.equals("SUB")){
-                        value -= Double.parseDouble(content.getText().toString());
+                        value = FourDecimalPrecision(value-Double.parseDouble(content.getText().toString()));
                         contentRes.setText(Double.toString(value));
                         opStatus = "NOT";
                         content.setText("");
                     }
                     else if(opStatus.equals("MUL")){
-                        value *= Double.parseDouble(content.getText().toString());
+                        value = FourDecimalPrecision(value*Double.parseDouble(content.getText().toString()));
                         contentRes.setText(Double.toString(value));
                         opStatus = "NOT";
                         content.setText("");
@@ -483,6 +314,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        butX.setOnLongClickListener(
+                V -> {
+                    content.setText("");
+                    return true;
+                }
+        );
         butC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -493,5 +330,60 @@ public class MainActivity extends AppCompatActivity {
                 statusB.setText("=");
             }
         });
+    }
+    public double FourDecimalPrecision(double base){
+        DecimalFormat format = new DecimalFormat("##.0000");
+        return Double.valueOf(format.format(base));
+    }
+    public void dualCondition(String opStatus_){
+        Map<String,String> map=new HashMap<String, String>();
+        map.put("ADD","+");
+        map.put("SUB","-");
+        map.put("MUL","*");
+        map.put("DIV","/");
+        map.put("MOD","%");
+
+        switch (opStatus){
+            case "ADD":
+                value = FourDecimalPrecision(value+Double.parseDouble(content.getText().toString()));
+                contentRes.setText(Double.toString(value));
+                opStatus = opStatus_;
+                statusB.setText(map.get(opStatus_));
+                break;
+            case "SUB":
+                value = FourDecimalPrecision(value-Double.parseDouble(content.getText().toString()));
+                contentRes.setText(Double.toString(value));
+                opStatus = opStatus_;
+                statusB.setText(map.get(opStatus_));
+                break;
+            case "MUL":
+                value = FourDecimalPrecision(value*Double.parseDouble(content.getText().toString()));
+                contentRes.setText(Double.toString(value));
+                opStatus = opStatus_;
+                statusB.setText(map.get(opStatus_));
+                break;
+            case "DIV":
+                double tmp = Double.parseDouble(content.getText().toString());
+                if(tmp != 0){
+                    value = FourDecimalPrecision(value/Double.parseDouble(content.getText().toString()));
+                    contentRes.setText(Double.toString(value));
+                    opStatus = opStatus_;
+                    statusB.setText(map.get(opStatus_));
+                }
+                else{
+                    contentRes.setText("Invalid");
+                    opStatus = "NOT";
+                    statusB.setText("=");
+                }
+                break;
+            case "MOD":
+                value = FourDecimalPrecision(value%Double.parseDouble(content.getText().toString()));
+                contentRes.setText(Double.toString(value));
+                opStatus = opStatus_;
+                statusB.setText(map.get(opStatus_));
+                break;
+            default:
+        }
+        content.setText("");
     }
 }
