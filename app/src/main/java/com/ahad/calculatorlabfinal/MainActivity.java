@@ -286,8 +286,6 @@ public class MainActivity extends AppCompatActivity {
         butMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("STA",opStatus);
-                Log.d("tag",Double.toString(value));
                 if(!content.getText().toString().matches("") && value != 0){
                     switch (opStatus){
                         case "ADD":
@@ -304,7 +302,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case "MUL":
                             value *= Double.parseDouble(content.getText().toString());
-                            Log.d("BAL",Double.toString(value));
                             contentRes.setText(Double.toString(value));
                             opStatus = "MUL";
                             statusB.setText("*");
@@ -338,10 +335,8 @@ public class MainActivity extends AppCompatActivity {
                         opStatus = "MUL";
                         statusB.setText("*");
                         content.setText("");
-                        Log.d("SAL",Double.toString(value));
                     }
                 }
-                Log.d("STA",opStatus);
             }
 
         });
