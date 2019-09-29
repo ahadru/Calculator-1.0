@@ -2,17 +2,14 @@ package com.ahad.calculatorlabfinal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
